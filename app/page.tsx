@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 
-import { Course } from "./types";
 import pdfToText from "react-pdftotext";
+import { extractCourseInfo } from "./logic";
 
 export default function App() {
   const [file, setFile] = useState<File | undefined>();
@@ -12,124 +12,70 @@ export default function App() {
 
   const extractDataFromPDF = () => {
     pdfToText(file as File)
-      .then((content) => extractCourseInfo(content))
+      .then((content) => extractCourseInfo(content, setGPA4, setGPA7))
       .catch((error) => console.error("Failed to extract text from pdf"));
   };
 
-  const extractCourseInfo = (text: string) => {
-    const regex =
-      /([A-Z]{4})\s+(\d{4})\s+([\w\s&-]+?)\s+(\d{1,2}\.\d{2})?\s+(\d{1,2}\.\d{2})?\s+(\d{1,3})?\s+(HD|DN|CR|PS|FL)?/g;
-
-    const extractedCourses: Course[] = [];
-    let match;
-
-    while ((match = regex.exec(text)) !== null) {
-      extractedCourses.push({
-        prefix: match[1], // Course prefix (e.g., COMP, MATH)
-        number: match[2], // Course number (e.g., 1511, 1131)
-        title: match[3], // Course title
-        attemptedUnits: match[4], // Attempted units
-        passedUnits: match[5], // Passed units
-        mark: match[6], // Mark or 'T' for transfer credits
-        grade: match[7] || "", // Grade, optional if mark is 'T'
-      });
-    }
-
-    console.log(extractedCourses);
-
-    convert7points(extractedCourses);
-    convert4points(extractedCourses);
-  };
-
-  const convert7points = (courses: Course[]) => {
-    let totalCourse = 0;
-    let hd = 0;
-    let d = 0;
-    let cr = 0;
-    let p = 0;
-    let f = 0;
-
-    courses
-      .filter((course) => course.grade && course.mark)
-      .forEach((course) => {
-        totalCourse++;
-
-        switch (course.grade) {
-          case "HD":
-            hd++;
-            break;
-          case "DN":
-            d++;
-            break;
-          case "CR":
-            cr++;
-            break;
-          case "PS":
-            p++;
-            break;
-          case "FL":
-            f++;
-            break;
-          default:
-            break;
-        }
-      });
-
-    const gpa = (hd * 7 + d * 6 + cr * 5 + p * 4 + f * 0) / totalCourse;
-    setGPA7(gpa);
-  };
-
-  const convert4points = (courses: Course[]) => {
-    let totalCourse = 0;
-    let hd_d = 0;
-    let cr = 0;
-    let p = 0;
-    let f = 0;
-
-    courses
-      .filter((course) => course.grade && course.mark)
-      .forEach((course) => {
-        totalCourse++;
-
-        switch (course.grade) {
-          case "HD":
-            hd_d++;
-            break;
-          case "DN":
-            hd_d++;
-            break;
-          case "CR":
-            cr++;
-            break;
-          case "PS":
-            p++;
-            break;
-          case "FL":
-            f++;
-            break;
-          default:
-            break;
-        }
-      });
-
-    const gpa = (hd_d * 4 + cr * 3 + p * 2 + f * 0) / totalCourse;
-    setGPA4(gpa);
-  };
-
   return (
-    <>
-      <div className="flex flex-col gap-y-5">
-        <input
-          type="file"
-          accept="application/pdf"
-          onChange={(e) => setFile(e.target.files?.[0])}
-        />
+    <div className="h-screen flex items-center justify-center p-10">
+      <div className="flex flex-col gap-y-5 w-full justify-center items-center">
+        <div className="flex items-center justify-center w-full max-w-xl">
+          <label
+            htmlFor="dropzone-file"
+            className="flex flex-col items-center justify-center w-full h-64 border-2
+            border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50
+            hover:bg-gray-100 hover:border-blue-200 hover:border-[4px]"
+          >
+            {file ? (
+              <div className="flex flex-col items-center justify-center pt-5 pb-6 gap-y-3">
+                <img src="./pdf.svg" className="w-16 h-16" />
+                <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
+                  {file.name}
+                </p>
+              </div>
+            ) : (
+              <div className="flex flex-col items-center justify-center pt-5 pb-6">
+                <svg
+                  className="w-8 h-8 mb-4 text-gray-500"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 20 16"
+                >
+                  <path
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
+                  />
+                </svg>
+                <p className="mb-2 text-sm text-gray-500">
+                  <span className="font-semibold">Click to upload</span> or drag
+                  and drop
+                </p>
+                <p className="text-xs text-gray-500">
+                  your UNSW Academic Statement in PDF
+                </p>
+              </div>
+            )}
+
+            <input
+              id="dropzone-file"
+              type="file"
+              accept="application/pdf"
+              onChange={(e) => setFile(e.target.files?.[0])}
+              className="hidden"
+            />
+          </label>
+        </div>
+
         <button onClick={extractDataFromPDF} disabled={!file}>
-          Convert
+          Convert WAM to GPA
         </button>
         <div>{GPA4}</div>
         {GPA7}
       </div>
-    </>
+    </div>
   );
 }
