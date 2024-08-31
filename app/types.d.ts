@@ -4,6 +4,6 @@ export interface Course {
   title: string;
   attemptedUnits: string;
   passedUnits: string;
-  mark: string;
+  mark?: string;
   grade?: string;
 }

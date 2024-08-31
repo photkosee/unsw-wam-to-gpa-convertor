@@ -7,9 +7,10 @@ import pdfToText from "react-pdftotext";
 
 export default function App() {
   const [file, setFile] = useState<File | undefined>();
-  const [courses, setCourses] = useState<Course[]>([]);
+  const [GPA7, setGPA7] = useState<number>();
+  const [GPA4, setGPA4] = useState<number>();
 
-  const convert = () => {
+  const extractDataFromPDF = () => {
     pdfToText(file as File)
       .then((content) => extractCourseInfo(content))
       .catch((error) => console.error("Failed to extract text from pdf"));
@@ -17,7 +18,8 @@ export default function App() {
 
   const extractCourseInfo = (text: string) => {
     const regex =
-      /([A-Z]{4})\s+(\d{4})\s+([\w\s&-]+?)\s+(\d{1,2}\.\d{2})\s+(\d{1,2}\.\d{2})\s+(\d{1,3}|T)\s+([A-Z]{2})?/g;
+      /([A-Z]{4})\s+(\d{4})\s+([\w\s&-]+?)\s+(\d{1,2}\.\d{2})?\s+(\d{1,2}\.\d{2})?\s+(\d{1,3})?\s+(HD|DN|CR|PS|FL)?/g;
+
     const extractedCourses: Course[] = [];
     let match;
 
@@ -33,16 +35,100 @@ export default function App() {
       });
     }
 
-    setCourses(extractedCourses);
-
     console.log(extractedCourses);
+
+    convert7points(extractedCourses);
+    convert4points(extractedCourses);
+  };
+
+  const convert7points = (courses: Course[]) => {
+    let totalCourse = 0;
+    let hd = 0;
+    let d = 0;
+    let cr = 0;
+    let p = 0;
+    let f = 0;
+
+    courses
+      .filter((course) => course.grade && course.mark)
+      .forEach((course) => {
+        totalCourse++;
+
+        switch (course.grade) {
+          case "HD":
+            hd++;
+            break;
+          case "DN":
+            d++;
+            break;
+          case "CR":
+            cr++;
+            break;
+          case "PS":
+            p++;
+            break;
+          case "FL":
+            f++;
+            break;
+          default:
+            break;
+        }
+      });
+
+    const gpa = (hd * 7 + d * 6 + cr * 5 + p * 4 + f * 0) / totalCourse;
+    setGPA7(gpa);
+  };
+
+  const convert4points = (courses: Course[]) => {
+    let totalCourse = 0;
+    let hd_d = 0;
+    let cr = 0;
+    let p = 0;
+    let f = 0;
+
+    courses
+      .filter((course) => course.grade && course.mark)
+      .forEach((course) => {
+        totalCourse++;
+
+        switch (course.grade) {
+          case "HD":
+            hd_d++;
+            break;
+          case "DN":
+            hd_d++;
+            break;
+          case "CR":
+            cr++;
+            break;
+          case "PS":
+            p++;
+            break;
+          case "FL":
+            f++;
+            break;
+          default:
+            break;
+        }
+      });
+
+    const gpa = (hd_d * 4 + cr * 3 + p * 2 + f * 0) / totalCourse;
+    setGPA4(gpa);
   };
 
   return (
     <>
       <div className="flex flex-col gap-y-5">
-        <input type="file" onChange={(e) => setFile(e.target.files?.[0])} />
-        <button onClick={convert}>Convert</button>
+        <input
+          type="file"
+          accept="application/pdf"
+          onChange={(e) => setFile(e.target.files?.[0])}
+        />
+        <button onClick={extractDataFromPDF} disabled={!file}>
+          Convert
+        </button>
+        <div>{GPA4}</div>
+        {GPA7}
       </div>
     </>
   );
