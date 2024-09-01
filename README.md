@@ -1,21 +1,33 @@
-### Table of Contents
+# UNSW WAM to GPA Convertor
+
+Struggling to convert your WAM to GPA? No worries, this app is here to help! Simply upload your UNSW academic statement, and we'll handle the rest, giving you your GPA instantly—no manual calculations needed!
+
+You can find a live build of this app at https://unsw-wam-to-gpa-convertor.vercel.app/
+
+## Table of Contents
 
 - [Inspiration](#inspiration)
 - [What this does?](#what-this-does)
+- [Note](#note)
+- [7-point and 4-point scale GPA logic](#7-point-and-4-point-scale-gpa-logic)
 - [Built With](#built-with)
+- [Reflection](#reflection)
+- [Disclaimer](#disclaimer)
 - [Author](#author)
-
-# UNSW WAM to GPA Convertor
-
 
 ## Inspiration
 
+Since UNSW uses the WAM system, which is different from most other universities, converting WAM to GPA can be confusing. Even with other conversion tools, students still need to manually count their credits, the number of courses with specific grades, and more, which can be a hassle. I wanted to create something that automates most of this process, and that’s how this idea came about.
 
 ## What this does?
 
+By simply uploading a UNSW academic statement, the app will extract the necessary information for all completed courses and calculate your GPA using that information.
+
+## Note
+
 [Grade Definitions (UNSW)](https://www.student.unsw.edu.au/grade)
 
-Currently only supporting HD|DN|CR|PS|FL Grades, which should cover most of the cases but it can still missing some edge case for which grade that I'm not sure whether it should be used to calculate GPA. Feel free to open a pull request for any potential improvement or any error/flaw in the logic.
+Currently, only HD, DN, CR, PS, and FL grades are supported. This should cover most cases, but there may still be some edge cases where it's unclear whether a grade should be used to calculate GPA. Feel free to open a pull request for any potential improvements or to report any errors or flaws in the logic.
 
 ## 7-point and 4-point scale GPA logic
 
