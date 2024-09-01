@@ -2,7 +2,7 @@
 
 Struggling to convert your WAM to GPA? No worries, this app is here to help! Simply upload your UNSW academic statement, and we'll handle the rest, giving you your GPA instantly—no manual calculations needed!
 
-You can find a live build of this app at https://unsw-wam-to-gpa-convertor.vercel.app/
+This app is now live at https://unsw-wam-to-gpa-convertor.vercel.app/
 
 ## Table of Contents
 
@@ -10,10 +10,12 @@ You can find a live build of this app at https://unsw-wam-to-gpa-convertor.verce
 - [What this does?](#what-this-does)
 - [Note](#note)
 - [7-point and 4-point scale GPA logic](#7-point-and-4-point-scale-gpa-logic)
-- [Built With](#built-with)
 - [Reflection](#reflection)
 - [Disclaimer](#disclaimer)
+- [Built With](#built-with)
 - [Author](#author)
+- [Deployment](#deployment)
+- [Contribution](#contribution)
 
 ## Inspiration
 
@@ -52,20 +54,11 @@ GPA = (4W + 3X + 2Y + 0F) divided by E
 - E: total number of credit points for which a student is effectively enrolled (excluding units with W or S)
 - F: number of credit points gained with an F grade
 
-## Built With
-
-- Next.js - Development environment
-- Tailwind CSS - CSS framework
-- shadcn/ui - User Interface library
-- react-pdftotext - PDF extraction library
 
 ## Reflection
 
 There weren’t many challenges since this is a relatively simple project. However, if I had to highlight one, the main challenge would be extracting all the course data from a PDF file. Initially, I tried using the pdf.js library, but it didn’t work as well as I had hoped. So, I switched to the react-pdftotext library, which was much easier to work with. Once I was able to extract the data from the PDF, I used regex to filter out the specific course data I needed. All of these implementations are contained in `./app/logic.ts`.
 
-## Contribution
-
-Pull requests are welcome for any potential improvements, as well as for any errors or edge cases you might find. The course extraction logic is located in `./app/logic.ts`. If you identify any issues, please feel free to reach out or open a pull request.
 
 ## Disclaimer
 
@@ -73,8 +66,25 @@ This website seeks to be a general tool for converting UNSW WAM to GPA, but its 
 
 Users are responsible for double-checking their GPAs and I have no responsibility on whether the information shown is accurate. This is a personal project and I do not represent the School, Faculty, or University (UNSW).
 
+## Built With
+
+- Next.js - Development environment
+- Tailwind CSS - CSS framework
+- shadcn/ui - User Interface library
+- react-pdftotext - PDF extraction library
+
 ## Author
 
 Phot Koseekrainiramon
 - [LinkedIn](https://www.linkedin.com/in/phot-kosee/)
 - [GitHub](https://github.com/photkosee)
+
+## Deployment
+
+This project is deployed to Vercel:
+
+https://unsw-wam-to-gpa-convertor.vercel.app/
+
+## Contribution
+
+Pull requests are welcome for any potential improvements, as well as for any errors or edge cases you might find. The course extraction logic is located in `./app/logic.ts`. If you identify any issues, please feel free to reach out or open a pull request.
