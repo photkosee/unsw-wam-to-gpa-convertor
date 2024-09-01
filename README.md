@@ -5,6 +5,9 @@
 - [Built With](#built-with)
 - [Author](#author)
 
+# UNSW WAM to GPA Convertor
+
+
 ## Inspiration
 
 
@@ -41,7 +44,22 @@ GPA = (4W + 3X + 2Y + 0F) divided by E
 
 - Next.js - Development environment
 - Tailwind CSS - CSS framework
+- shadcn/ui - User Interface library
 - react-pdftotext - PDF extraction library
+
+## Reflection
+
+There weren’t many challenges since this is a relatively simple project. However, if I had to highlight one, the main challenge would be extracting all the course data from a PDF file. Initially, I tried using the pdf.js library, but it didn’t work as well as I had hoped. So, I switched to the react-pdftotext library, which was much easier to work with. Once I was able to extract the data from the PDF, I used regex to filter out the specific course data I needed. All of these implementations are contained in `./app/logic.ts`.
+
+## Contribution
+
+Pull requests are welcome for any potential improvements, as well as for any errors or edge cases you might find. The course extraction logic is located in `./app/logic.ts`. If you identify any issues, please feel free to reach out or open a pull request.
+
+## Disclaimer
+
+This website seeks to be a general tool for converting UNSW WAM to GPA, but its information has not been officially endorsed and is subject to change or correction. This is not official advice, and you should confirm any statements are correct before relying on it. You should confirm with official resources endorsed by UNSW and any information found here may not necessarily represent those of the School, Faculty, or University (UNSW).
+
+Users are responsible for double-checking their GPAs and I have no responsibility on whether the information shown is accurate. This is a personal project and I do not represent the School, Faculty, or University (UNSW).
 
 ## Author
 
