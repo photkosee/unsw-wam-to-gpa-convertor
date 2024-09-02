@@ -7,3 +7,8 @@ export interface Course {
   mark?: string;
   grade?: string;
 }
+
+export interface CustomDialogProps {
+  open: boolean;
+  setOpen: Dispatch<SetStateAction<boolean>>;
+}
