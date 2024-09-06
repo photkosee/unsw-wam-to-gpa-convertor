@@ -26,7 +26,7 @@ const ResultDialog = ({
         <DialogHeader>
           <DialogTitle>
             {courses && courses.length > 0 ? (
-              <>Here is your GPAs</>
+              <>Here are your GPAs</>
             ) : (
               <>Something went wrong</>
             )}

@@ -48,10 +48,9 @@ export default function App() {
           description: "Please make sure to use a academic statement.",
         });
       });
-    setTimeout(() => {
-      setLoading(false);
-      setOpenResult(true);
-    }, 500);
+
+    setLoading(false);
+    setOpenResult(true);
   };
 
   const checkFileType = (file: File | undefined) => {
@@ -70,7 +69,7 @@ export default function App() {
   return (
     <div
       className="min-h-screen flex flex-col items-center justify-center p-5 md:p-10
-      relative bg-white gap-y-7"
+      relative bg-white gap-y-7 text-black"
     >
       <h1 className="font-extrabold text-[23px] sm:text-[30px] text-center mt-2">
         <span className="text-[#f56551]">Convert your UNSW WAM to GPA:</span>{" "}
@@ -104,13 +103,13 @@ export default function App() {
         </Link>
       </div>
 
-      <div className="flex flex-col gap-y-5 w-full justify-center items-center">
+      <div className="flex flex-col gap-y-5 w-full justify-center items-center max-w-lg">
         <InputFile file={file} checkFileType={checkFileType} />
 
         <Button
           onClick={extractDataFromPDF}
           disabled={loading}
-          className="mb-2"
+          className="mb-2 w-full"
         >
           {loading ? (
             <>

@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 interface InputFileProps {
   file: File | undefined;
   checkFileType: (file: File | undefined) => void;
@@ -5,17 +7,29 @@ interface InputFileProps {
 
 const InputFile = ({ file, checkFileType }: InputFileProps) => {
   return (
-    <div className="flex items-center justify-center w-full max-w-lg">
+    <div className="flex items-center justify-center w-full">
       <label
         htmlFor="dropzone-file"
         className="flex flex-col items-center justify-center w-full h-64 border-2
-    border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50
-    hover:bg-gray-100 hover:border-blue-200 hover:border-[4px]"
+        border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50
+        hover:bg-gray-100 hover:border-blue-200 hover:border-[4px]"
       >
         {file ? (
-          <div className="flex flex-col items-center justify-center pt-5 pb-6 gap-y-3">
-            <img src="./pdf.svg" className="w-16 h-16" />
-            <p className="mb-2 text-xs md:text-sm text-gray-500 dark:text-gray-400">
+          <div
+            className="flex flex-col items-center justify-center pt-5 pb-6
+            gap-y-3 px-5"
+          >
+            <Image
+              src="./pdf.svg"
+              alt="pdf"
+              width={0}
+              height={0}
+              className="w-16 h-auto"
+            />
+            <p
+              className="mb-2 text-xs md:text-sm text-gray-500 dark:text-gray-400
+              text-center"
+            >
               {file.name}
             </p>
           </div>
