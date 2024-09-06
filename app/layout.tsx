@@ -10,6 +10,7 @@ export const metadata: Metadata = {
   title: "UNSW WAM to GPA Convertor",
   description:
     "An app that helps UNSW students convert their WAM to GPA by simply uploading their academic transcript",
+  authors: [{ name: "Phot Koseekrainiramon" }],
 };
 
 export default function RootLayout({
