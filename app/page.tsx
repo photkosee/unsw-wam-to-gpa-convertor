@@ -131,6 +131,17 @@ export default function App() {
           courses={courses}
         />
       </div>
+
+      <div>
+        By{" "}
+        <Link
+          href="https://www.linkedin.com/in/phot-kosee/"
+          className="underline hover:text-blue-700"
+          target="_blank"
+        >
+          Phot Koseekrainiramon
+        </Link>
+      </div>
     </div>
   );
 }
