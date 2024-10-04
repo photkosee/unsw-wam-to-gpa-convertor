@@ -24,8 +24,8 @@ export default function RootLayout({
       <body className={inter.className}>
         {children}
         <Toaster />
+        <Analytics />
       </body>
-      <Analytics />
     </html>
   );
 }
