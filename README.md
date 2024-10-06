@@ -10,12 +10,12 @@ This app is now live at https://unsw-wam-to-gpa-convertor.vercel.app/
 - [What this does?](#what-this-does)
 - [Note](#note)
 - [7-point and 4-point scale GPA logic](#7-point-and-4-point-scale-gpa-logic)
-- [Reflection](#reflection)
 - [Disclaimer](#disclaimer)
 - [Built With](#built-with)
 - [Author](#author)
 - [Deployment](#deployment)
 - [Contribution](#contribution)
+- [Reflection](#reflection)
 
 ## Inspiration
 
@@ -54,12 +54,6 @@ GPA = (4W + 3X + 2Y + 0F) divided by E
 - E: total number of credit points for which a student is effectively enrolled (excluding units with W or S)
 - F: number of credit points gained with an F grade
 
-
-## Reflection
-
-There weren’t many challenges since this is a relatively simple project. However, if I had to highlight one, the main challenge would be extracting all the course data from a PDF file. Initially, I tried using the pdf.js library, but it didn’t work as well as I had hoped. So, I switched to the react-pdftotext library, which was much easier to work with. Once I was able to extract the data from the PDF, I used regex to filter out the specific course data I needed. All of these implementations are contained in `./app/logic.ts`.
-
-
 ## Disclaimer
 
 This website seeks to be a general tool for converting UNSW WAM to GPA, but its information has not been officially endorsed and is subject to change or correction. This is not official advice, and you should confirm any statements are correct before relying on it. You should confirm with official resources endorsed by UNSW and any information found here may not necessarily represent those of the School, Faculty, or University (UNSW).
@@ -88,3 +82,13 @@ https://unsw-wam-to-gpa-convertor.vercel.app/
 ## Contribution
 
 Pull requests are welcome for any potential improvements, as well as for any errors or edge cases you might find. The course extraction logic is located in `./app/logic.ts`. If you identify any issues, please feel free to reach out or open a pull request.
+
+## Reflection
+
+There weren’t many challenges since this is a relatively simple project. However, if I had to highlight one, the main challenge would be extracting all the course data from a PDF file. Initially, I tried using the pdf.js library, but it didn’t work as well as I had hoped. So, I switched to the react-pdftotext library, which was much easier to work with. Once I was able to extract the data from the PDF, I used regex to filter out the specific course data I needed. All of these implementations are contained in `./app/logic.ts`.
+
+### Feedback from Promoting
+
+There were no technical issues after deployment, and when I promoted it on LinkedIn, I got a lot of positive feedback from friends who found it useful. At that time, I hadn't added Vercel Analytics to my project, so I didn't know the exact number of users, but I estimated there were around 70+. I then added Vercel Analytics to track the traffic (I should have done this earlier but didn’t expect so many users). After that, I decided to promote it more because I thought it would be helpful for other students. I made a post on Reddit (under the UNSW tag) and got over 100 visitors in less than a day, which worked well for promotion.
+
+However, I ran into one issue I didn’t expect: someone commented that it was a phishing attempt (though I’m not sure if they were serious), and the comment got a few upvotes. I asked a few friends, and none of them thought the project seemed suspicious. The academic statements I ask users to upload don’t contain sensitive information. I also mentioned in the Reddit post that I don’t collect any user data, and I even offered to let people check my code if they were concerned (and it is open source here). This has been a good reminder to think about how to make a project feel safe to users, even though most people didn’t seem to have any concerns. But it is a valid concern since my Reddit account is new, and I never post anything, making it much more anonymous compared to my LinkedIn account. Especially on Reddit, it's hard to trust random people on the internet asking us to click on random links. I'll have to be more careful next time.
